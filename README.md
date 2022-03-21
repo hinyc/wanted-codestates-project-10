@@ -4,8 +4,14 @@
 
 ## 📎 &nbsp; [배포링크] https://friendly-swartz-e77c8e.netlify.app
 
+## 기능 시연
 <div align="center">
-<img width="600px" src=""/>
+<img width="600px" src="https://user-images.githubusercontent.com/87487161/159296437-44a9f2c4-774a-4331-967d-48ca102089db.gif"/>
+</div>
+
+## 반응형 시연
+<div align="center">
+<img width="600px" src="https://user-images.githubusercontent.com/87487161/159296459-ceb09a6f-28a4-42f9-99db-8d16991d9cd9.gif"/>
 </div>
 
 <br />
