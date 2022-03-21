@@ -13,6 +13,7 @@ import {
   showFalse,
   showTrue,
 } from '../modules/searchList';
+
 export default function SearchInput() {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
@@ -116,4 +117,11 @@ const Button = styled.button`
   border-radius: 0 42px 42px 0;
   background-color: #027be8;
   color: #fff;
+  transition: 0.3s;
+  :hover {
+    opacity: 0.65;
+  }
+  :active {
+    opacity: 0.95;
+  }
 `;
