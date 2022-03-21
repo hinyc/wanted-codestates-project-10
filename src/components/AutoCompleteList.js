@@ -8,6 +8,7 @@ import {
   setSelectList,
 } from '../modules/searchList';
 import { css } from 'styled-components';
+import { limit } from './SearchInput';
 
 export default function AutoCompleteList() {
   const autoCompleteArr = useSelector((state) => state.searchList.data);
@@ -27,41 +28,51 @@ export default function AutoCompleteList() {
   console.log(selectList);
   return (
     <Container>
-      {topSevenList.length > 0 ? (
-        <>
-          <SubContent>추천 검색어</SubContent>
-          <ContentWrapper>
-            {topSevenList.map((el, idx) => (
-              <Content
-                key={el.id}
-                onClick={() => clickHandler(el.name)}
-                onMouseEnter={() => mouseEnterHandler(idx)}
-                onMouseLeave={() => dispatch(resetSelectList())}
-                idx={idx}
-                selectList={selectList}
-              >
-                <CgSearch className="icon" />
-                {el.name}
-              </Content>
-            ))}
-          </ContentWrapper>
-        </>
-      ) : isLoading ? (
-        <SubContent>검색중...</SubContent>
-      ) : (
-        <SubContent> 검색어 없음</SubContent>
-      )}
+      <SubContainer>
+        {topSevenList.length > 0 ? (
+          <>
+            <SubContent>추천 검색어</SubContent>
+            <ContentWrapper>
+              {topSevenList.map((el, idx) => (
+                <Content
+                  key={el.id}
+                  onClick={() => clickHandler(el.name)}
+                  onMouseEnter={() => mouseEnterHandler(idx)}
+                  onMouseLeave={() => dispatch(resetSelectList())}
+                  idx={idx}
+                  selectList={selectList}
+                >
+                  <CgSearch className="icon" />
+                  {el.name}
+                </Content>
+              ))}
+            </ContentWrapper>
+          </>
+        ) : isLoading ? (
+          <SubContent>검색중...</SubContent>
+        ) : (
+          <SubContent> 검색어 없음</SubContent>
+        )}
+      </SubContainer>
     </Container>
   );
 }
 
 const Container = styled.div`
   width: 660px;
-  margin: 8px auto 0;
+  margin: auto;
+  @media ${limit} {
+    width: 100%;
+    padding: 0 20px;
+  }
+`;
+const SubContainer = styled.div`
   padding: 24px 0 16px 0;
-  border-radius: 20px;
   background-color: #fff;
+  border-radius: 20px;
+  margin: 8px auto 0;
   font-size: 1rem;
+  width: 100%;
 `;
 
 const SubContent = styled.div`
