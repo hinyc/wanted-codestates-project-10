@@ -7,7 +7,9 @@ import { setSearchValue } from '../modules/searchList';
 export default function AutoCompleteList() {
   const autoCompleteArr = useSelector((state) => state.searchList.data);
   const topSevenList = autoCompleteArr.slice(0, 7);
+  const isLoading = useSelector((state) => state.searchList.isLoading);
   const dispatch = useDispatch();
+
   const clickHandler = (value) => {
     dispatch(setSearchValue(value));
     window.open(`https://clinicaltrialskorea.com/studies?condition=${value}`);
@@ -26,8 +28,10 @@ export default function AutoCompleteList() {
             ))}
           </ContentWrapper>
         </>
+      ) : isLoading ? (
+        <SubContent>검색중...</SubContent>
       ) : (
-        <SubContent>검색어 없음</SubContent>
+        <SubContent> 검색어 없음</SubContent>
       )}
     </Container>
   );

@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import AutoCompleteList from '../components/AutoCompleteList';
 import Content from '../components/Content';
 import SearchInput from '../components/SearchInput';
 
 export default function Main() {
+  const showAutoComplete = useSelector(
+    (state) => state.searchList.showAutoComplete,
+  );
   return (
     <Container>
       <Content />
       <SearchInput />
-      <AutoCompleteList />
+      {showAutoComplete && <AutoCompleteList />}
     </Container>
   );
 }

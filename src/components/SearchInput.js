@@ -3,42 +3,60 @@ import styled from 'styled-components';
 import { CgSearch } from 'react-icons/cg';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
+import _ from 'lodash';
 import {
+  loadingFalse,
+  loadingTrue,
   resetSearchValue,
   setSearchList,
-  setSearchValue,
+  showFalse,
+  showTrue,
 } from '../modules/searchList';
-import _ from 'lodash';
 export default function SearchInput() {
   const dispatch = useDispatch();
-
   const inputRef = useRef(null);
   const searchValue = useSelector((state) => state.searchList.searchValue);
-  // const setInputValue = (e) => {
-  //   dispatch(setSearchValue(e.target.value));
-  // };
-  const inputHandler = _.throttle(() => {
+
+  const inputHandler = _.debounce(() => {
     const inputValue = inputRef.current.value;
-    axios
-      .get(
-        `https://api.clinicaltrialskorea.com/api/v1/search-conditions/?name=${inputValue}`,
-      )
-      .then((res) => {
-        dispatch(setSearchList(res.data));
-        console.log('a');
-      })
-      .catch((err) => console.error(err));
+    if (inputValue.length > 0) {
+      dispatch(showTrue());
+      dispatch(loadingTrue());
+      axios
+        .get(
+          `https://api.clinicaltrialskorea.com/api/v1/search-conditions/?name=${inputValue}`,
+        )
+        .then((res) => {
+          dispatch(setSearchList(res.data));
+          dispatch(loadingFalse());
+          console.log('as');
+        })
+        .catch((err) => {
+          dispatch(loadingFalse());
+          console.error(err);
+        });
+    }
   }, 500);
 
   const focusHandler = () => {
     dispatch(resetSearchValue());
   };
+
   const buttonHandler = (e) => {
+    const inputValue = inputRef.current.value;
     if (e.type === 'click' || e.key === 'Enter') {
-      const inputValue = inputRef.current.value;
       window.open(
         `https://clinicaltrialskorea.com/studies?condition=${inputValue}`,
       );
+    }
+  };
+
+  const lengthCheckHandler = (e) => {
+    const inputValue = inputRef.current.value;
+    if (e.key === 'Backspace') {
+      if (!inputValue.length) {
+        dispatch(showFalse());
+      }
     }
   };
   return (
@@ -51,7 +69,8 @@ export default function SearchInput() {
           onChange={inputHandler}
           onFocus={focusHandler}
           onKeyDown={buttonHandler}
-          value={searchValue ? searchValue : null}
+          onKeyUp={lengthCheckHandler}
+          value={searchValue}
         />
       </InputContainer>
       <Button onClick={buttonHandler}>검색</Button>
