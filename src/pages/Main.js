@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import AutoCompleteList from '../components/AutoCompleteList';
 import Content from '../components/Content';
 import SearchInput from '../components/SearchInput';
 
@@ -8,6 +9,7 @@ export default function Main() {
     <Container>
       <Content />
       <SearchInput />
+      <AutoCompleteList />
     </Container>
   );
 }
