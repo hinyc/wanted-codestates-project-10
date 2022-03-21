@@ -25,7 +25,6 @@ export default function AutoCompleteList() {
   const mouseEnterHandler = (idx) => {
     dispatch(setSelectList(idx));
   };
-  console.log(selectList);
   return (
     <Container>
       <SubContainer>
