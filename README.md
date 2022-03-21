@@ -39,14 +39,14 @@
 
 ### ️⚙️ &nbsp; 기술 스텍 
 
-<img src="https://img.shields.io/badge/Reat-333333?style=flat-round&logo=React&logoColor=ffffff"/></a> &nbsp;
-<img src="https://img.shields.io/badge/JavaScript-333333?style=flat-round&logo=JavaScript&logoColor=ffffff"/></a>&nbsp;
-<img src="https://img.shields.io/badge/HTML5-333333?style=flat-round&logo=HTML5&logoColor=ffffff"/></a>&nbsp;
-<img src="https://img.shields.io/badge/CSS3-333333?style=flat-round&logo=CSS3&logoColor=ffffff"/></a> &nbsp;<br />
-<img src="https://img.shields.io/badge/Redux-333333?style=flat-round&logo=Redux&logoColor=ffffff"/></a> &nbsp;
-<img src="https://img.shields.io/badge/Axios-333333?style=flat-round&logo=PlayStation&logoColor=ffffff"/></a> &nbsp;
-<img src="https://img.shields.io/badge/Figma-333333?style=flat-round&logo=Figma&logoColor=ffffff"/></a> &nbsp;
-<img src="https://img.shields.io/badge/Discord-333333?style=flat-round&logo=Discord&logoColor=ffffff"/></a> &nbsp;
+<p>
+    <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> 
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/>
+  </a>  &nbsp;  <a href="https://redux.js.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="redux" width="40" height="40"/> 
+  </a> &nbsp;  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> &nbsp; <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> 
+  </a> &nbsp;  <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/>
+  </a>  &nbsp; 
+  </p>
 
 
 <br />
