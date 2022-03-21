@@ -2,7 +2,7 @@
 
 # ✨ &nbsp; wanted-codestates-project-10
 
-# 📎 &nbsp; [배포링크] https://friendly-swartz-e77c8e.netlify.app
+## 📎 &nbsp; [배포링크] https://friendly-swartz-e77c8e.netlify.app
 
 <div align="center">
 <img width="600px" src=""/>
