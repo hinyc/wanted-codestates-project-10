@@ -13,6 +13,7 @@ import {
   showFalse,
   showTrue,
 } from '../modules/searchList';
+
 export default function SearchInput() {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
@@ -78,11 +79,19 @@ export default function SearchInput() {
   );
 }
 
+export const limit = `(max-width:1040px)`;
+
 const Wrapper = styled.div`
   width: 660px;
   height: 64.8px;
-  margin: auto;
   display: flex;
+  margin: auto;
+  padding: 0px;
+  @media ${limit} {
+    width: 100%;
+    padding: 0 20px;
+    height: 46.4px;
+  }
 `;
 
 const InputContainer = styled.div`
@@ -93,19 +102,34 @@ const InputContainer = styled.div`
   border-radius: 42px 0 0 42px;
   align-items: center;
   padding: 20px 24px;
+  position: relative;
   .icon {
     font-size: 1.125rem;
   }
+  @media ${limit} {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 42px;
+    .icon {
+      position: absolute;
+      right: 20px;
+    }
+  }
 `;
+
 const Input = styled.input`
   width: 100%;
-  font-size: 1.125rem;
-  padding: 0 12px;
   outline: none;
+  padding: 0 12px;
+  font-size: 1.125rem;
   ::placeholder {
     font-size: 1.125rem;
     font-size: 100%;
     color: #abb3bb;
+  }
+  @media ${limit} {
+    font-size: 0.875rem;
+    padding: 0;
   }
 `;
 
@@ -116,4 +140,14 @@ const Button = styled.button`
   border-radius: 0 42px 42px 0;
   background-color: #027be8;
   color: #fff;
+  transition: 0.3s;
+  :hover {
+    opacity: 0.65;
+  }
+  :active {
+    opacity: 0.95;
+  }
+  @media ${limit} {
+    display: none;
+  }
 `;

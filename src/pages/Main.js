@@ -12,7 +12,6 @@ export default function Main() {
     (state) => state.searchList.showAutoComplete,
   );
   useEffect(() => {
-    console.log('render');
     window.addEventListener('keydown', (e) => {
       switch (e.key) {
         case 'ArrowDown':
