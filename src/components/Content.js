@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { limit } from './SearchInput';
 
 export default function Content() {
   return (
@@ -13,14 +14,16 @@ export default function Content() {
 }
 
 const Wrapper = styled.div`
-  width: 660px;
+  width: 100%;
   margin: 0 auto 20px;
-
+  font-size: 2.125rem;
   p {
     text-align: center;
-    font-size: 2.125rem;
     font-weight: 700;
     letter-spacing: -0.018em;
     line-height: 1.6;
+    @media ${limit} {
+      font-size: 1.25rem;
+    }
   }
 `;
