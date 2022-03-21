@@ -8,6 +8,7 @@ import {
   loadingFalse,
   loadingTrue,
   resetSearchValue,
+  resetSelectList,
   setSearchList,
   showFalse,
   showTrue,
@@ -29,10 +30,9 @@ export default function SearchInput() {
         .then((res) => {
           dispatch(setSearchList(res.data));
           dispatch(loadingFalse());
-          console.log('as');
+          dispatch(resetSelectList());
         })
         .catch((err) => {
-          dispatch(loadingFalse());
           console.error(err);
         });
     }

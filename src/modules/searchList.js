@@ -5,6 +5,10 @@ const SHOW_TRUE = 'searchList/SHOW_TRUE';
 const SHOW_FALSE = 'searchList/SHOW_FALSE';
 const LOADING_TRUE = 'searchList/LOADING_TRUE';
 const LOADING_FALSE = 'searchList/LOADING_FALSE';
+const SET_SELECT_LIST = 'searchList/SET_SELECT_LIST';
+const RESET_SELECT_LIST = 'searchList/RESET_SELECT_LIST';
+const UP_SELECT_LIST = 'searchList/UP_SELECT_LIST';
+const DOWN_SELECT_LIST = 'searchList/DOWN_SELECT_LIST';
 
 export const setSearchList = (data) => ({ type: SET_SEARCH_LIST, data });
 export const setSearchValue = (value) => ({ type: SET_SEARCH_VALUE, value });
@@ -13,12 +17,17 @@ export const showTrue = () => ({ type: SHOW_TRUE });
 export const showFalse = () => ({ type: SHOW_FALSE });
 export const loadingTrue = () => ({ type: LOADING_TRUE });
 export const loadingFalse = () => ({ type: LOADING_FALSE });
+export const setSelectList = (idx) => ({ type: SET_SELECT_LIST, idx });
+export const resetSelectList = () => ({ type: RESET_SELECT_LIST });
+export const upSelectList = () => ({ type: UP_SELECT_LIST });
+export const downSelectList = () => ({ type: DOWN_SELECT_LIST });
 
 const initialState = {
   data: [],
   searchValue: undefined,
   showAutoComplete: false,
   isLoading: false,
+  selectList: -1,
 };
 
 export default function searchList(state = initialState, action) {
@@ -54,6 +63,34 @@ export default function searchList(state = initialState, action) {
       return {
         ...state,
         isLoading: false,
+      };
+    case SET_SELECT_LIST:
+      return {
+        ...state,
+        selectList: action.idx,
+      };
+    case RESET_SELECT_LIST:
+      return {
+        ...state,
+        selectList: -1,
+      };
+    case UP_SELECT_LIST:
+      let newUpIdx = state.selectList;
+      if (state.selectList > 0) newUpIdx--;
+      if (state.selectList === -1) newUpIdx = 0;
+      return {
+        ...state,
+        selectList: newUpIdx,
+      };
+
+    case DOWN_SELECT_LIST:
+      let newDownIdx = state.selectList;
+      if (state.selectList < state.data.length - 1) {
+        newDownIdx++;
+      }
+      return {
+        ...state,
+        selectList: newDownIdx,
       };
     default:
       return state;
