@@ -1,8 +1,8 @@
 <br />
 
-# 🌈 &nbsp; wanted-codestates-project-10
+# ✨ &nbsp; wanted-codestates-project-10
 
-## 📎 &nbsp; [배포링크] https://friendly-swartz-e77c8e.netlify.app
+# 📎 &nbsp; [배포링크] https://friendly-swartz-e77c8e.netlify.app
 
 <div align="center">
 <img width="600px" src=""/>
@@ -10,8 +10,7 @@
 
 <br />
 
- 
-## 😎 &nbsp; 기능 구현 목록
+## 🤩 &nbsp; 기능 구현 목록
 ### 1. 질환명을 입력하면 자동완성 기능으로 검색어 추천기능.
 > `Lodash` 라이브러리의 `debounce` 함수를 사용해, 검색어 입력시 API 요청을 0.5초에 한번만 하도록 구현.<br/>
 > 애초에 자동완성을 위해 API요청이 필요한대 `onChange` 이벤트가 자음, 모음 하나하나 입력시마다 실행되면 불필요한 API 요청이 되기때문에 요청 횟수를 제안함.
@@ -155,7 +154,7 @@ const InputContainer = styled.div`
 ```
 
 
-## 어려웠던점
+## 🤔 어려웠던점
 ### 화살표를 이용하여 자동완성 목록 선택하는 부분
 > 먼저 화살표를 눌렀을 때 이벤트를 누가 받아야하는지에 대해서부터 고민을 시작. <br/>
 > ➪ 검색을하면서 루트객체인 `window`가 이벤트를 받도록 하면된다는 실마리를 얻음.
