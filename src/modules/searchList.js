@@ -85,7 +85,7 @@ export default function searchList(state = initialState, action) {
 
     case DOWN_SELECT_LIST:
       let newDownIdx = state.selectList;
-      if (state.selectList < state.data.length - 1) {
+      if (state.selectList < state.data.slice(0, 7).length - 1) {
         newDownIdx++;
       }
       return {
