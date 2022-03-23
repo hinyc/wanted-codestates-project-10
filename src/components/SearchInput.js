@@ -21,7 +21,17 @@ export default function SearchInput() {
 
   const inputHandler = _.debounce(() => {
     const inputValue = inputRef.current.value;
-    getCookie(inputValue);
+    const getValue = getCookie(inputValue);
+
+    if (getValue) {
+      dispatch(showTrue());
+      dispatch(loadingTrue());
+      dispatch(setSearchList(getValue));
+      dispatch(loadingFalse());
+      dispatch(resetSelectList());
+      return;
+    }
+
     if (inputValue.length > 0) {
       dispatch(showTrue());
       dispatch(loadingTrue());
@@ -30,8 +40,10 @@ export default function SearchInput() {
           `https://api.clinicaltrialskorea.com/api/v1/search-conditions/?name=${inputValue}`,
         )
         .then((res) => {
+          console.log('API 요청');
           dispatch(setSearchList(res.data));
-          setCookie(inputValue, res.data, 7);
+          // 1일후 삭제
+          setCookie(inputValue, res.data, 1);
           dispatch(loadingFalse());
           dispatch(resetSelectList());
         })
@@ -52,21 +64,22 @@ export default function SearchInput() {
       today.toGMTString() +
       ';';
   };
-  const getCookie = (key) => {
-    key = new RegExp(key + '=([^;]*)'); // 쿠키들을 세미콘론으로 구분하는 정규표현식 정의
-    console.log(document.cookie);
 
+  const getCookie = (key) => {
     const cookies = document.cookie.split(`; `).map((el) => el.split('='));
     let getItem = [];
-    for (let arr of cookies) {
-      if (arr[0] === key) {
-        getItem = arr[1];
+
+    for (let i = 0; i < cookies.length; i++) {
+      if (cookies[i][0] === key) {
+        getItem.push(cookies[i][1]);
+        break;
       }
     }
-
-    // console.log(key.test(document.cookie) ? document.cookie(key) : '');
-    return key.test(document.cookie) ? cookies : ''; // 인자로 받은 키에 해당하는 키가 있으면 값을 반환
+    if (getItem.length > 0) {
+      return JSON.parse(getItem[0]);
+    }
   };
+
   const focusHandler = () => {
     dispatch(resetSearchValue());
   };
