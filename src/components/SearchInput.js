@@ -21,6 +21,7 @@ export default function SearchInput() {
 
   const inputHandler = _.debounce(() => {
     const inputValue = inputRef.current.value;
+    getCookie(inputValue);
     if (inputValue.length > 0) {
       dispatch(showTrue());
       dispatch(loadingTrue());
@@ -30,6 +31,7 @@ export default function SearchInput() {
         )
         .then((res) => {
           dispatch(setSearchList(res.data));
+          setCookie(inputValue, res.data, 7);
           dispatch(loadingFalse());
           dispatch(resetSelectList());
         })
@@ -39,6 +41,32 @@ export default function SearchInput() {
     }
   }, 500);
 
+  const setCookie = (key, value, expiredDays) => {
+    let today = new Date();
+    today.setDate(today.getDate() + expiredDays);
+    document.cookie =
+      key +
+      '=' +
+      JSON.stringify(value) +
+      '; path=/; expires=' +
+      today.toGMTString() +
+      ';';
+  };
+  const getCookie = (key) => {
+    key = new RegExp(key + '=([^;]*)'); // 쿠키들을 세미콘론으로 구분하는 정규표현식 정의
+    console.log(document.cookie);
+
+    const cookies = document.cookie.split(`; `).map((el) => el.split('='));
+    let getItem = [];
+    for (let arr of cookies) {
+      if (arr[0] === key) {
+        getItem = arr[1];
+      }
+    }
+
+    // console.log(key.test(document.cookie) ? document.cookie(key) : '');
+    return key.test(document.cookie) ? cookies : ''; // 인자로 받은 키에 해당하는 키가 있으면 값을 반환
+  };
   const focusHandler = () => {
     dispatch(resetSearchValue());
   };
