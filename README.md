@@ -160,7 +160,69 @@ const InputContainer = styled.div`
 `;
 
 ```
+5. API 요청시마다 해당 검색어와 결과를 쿠키에 저장하여 동일 검색을 재요청하는 일이 없도록 구현.
+```jsx
+const inputHandler = _.debounce(() => {
+    const inputValue = inputRef.current.value;
+    const getValue = getCookie(inputValue);
 
+    if (getValue) {
+      dispatch(showTrue());
+      dispatch(loadingTrue());
+      dispatch(setSearchList(getValue));
+      dispatch(loadingFalse());
+      dispatch(resetSelectList());
+      return;
+    }
+
+    if (inputValue.length > 0) {
+      dispatch(showTrue());
+      dispatch(loadingTrue());
+      axios
+        .get(
+          `https://api.clinicaltrialskorea.com/api/v1/search-conditions/?name=${inputValue}`,
+        )
+        .then((res) => {
+          console.log('API 요청');
+          dispatch(setSearchList(res.data));
+          // 1일후 삭제
+          setCookie(inputValue, res.data, 1);
+          dispatch(loadingFalse());
+          dispatch(resetSelectList());
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  }, 500);
+
+  const setCookie = (key, value, expiredDays) => {
+    let today = new Date();
+    today.setDate(today.getDate() + expiredDays);
+    document.cookie =
+      key +
+      '=' +
+      JSON.stringify(value) +
+      '; path=/; expires=' +
+      today.toGMTString() +
+      ';';
+  };
+
+  const getCookie = (key) => {
+    const cookies = document.cookie.split(`; `).map((el) => el.split('='));
+    let getItem = [];
+
+    for (let i = 0; i < cookies.length; i++) {
+      if (cookies[i][0] === key) {
+        getItem.push(cookies[i][1]);
+        break;
+      }
+    }
+    if (getItem.length > 0) {
+      return JSON.parse(getItem[0]);
+    }
+  };
+```
 
 ## 🤔 어려웠던점
 ### 화살표를 이용하여 자동완성 목록 선택하는 부분
