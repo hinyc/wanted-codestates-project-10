@@ -21,6 +21,17 @@ export default function SearchInput() {
 
   const inputHandler = _.debounce(() => {
     const inputValue = inputRef.current.value;
+    const getValue = getCookie(inputValue);
+
+    if (getValue) {
+      dispatch(showTrue());
+      dispatch(loadingTrue());
+      dispatch(setSearchList(getValue));
+      dispatch(loadingFalse());
+      dispatch(resetSelectList());
+      return;
+    }
+
     if (inputValue.length > 0) {
       dispatch(showTrue());
       dispatch(loadingTrue());
@@ -29,7 +40,10 @@ export default function SearchInput() {
           `https://api.clinicaltrialskorea.com/api/v1/search-conditions/?name=${inputValue}`,
         )
         .then((res) => {
+          console.log('API 요청');
           dispatch(setSearchList(res.data));
+          // 1일후 삭제
+          setCookie(inputValue, res.data, 1);
           dispatch(loadingFalse());
           dispatch(resetSelectList());
         })
@@ -38,6 +52,33 @@ export default function SearchInput() {
         });
     }
   }, 500);
+
+  const setCookie = (key, value, expiredDays) => {
+    let today = new Date();
+    today.setDate(today.getDate() + expiredDays);
+    document.cookie =
+      key +
+      '=' +
+      JSON.stringify(value) +
+      '; path=/; expires=' +
+      today.toGMTString() +
+      ';';
+  };
+
+  const getCookie = (key) => {
+    const cookies = document.cookie.split(`; `).map((el) => el.split('='));
+    let getItem = [];
+
+    for (let i = 0; i < cookies.length; i++) {
+      if (cookies[i][0] === key) {
+        getItem.push(cookies[i][1]);
+        break;
+      }
+    }
+    if (getItem.length > 0) {
+      return JSON.parse(getItem[0]);
+    }
+  };
 
   const focusHandler = () => {
     dispatch(resetSearchValue());
